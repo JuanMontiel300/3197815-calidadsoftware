@@ -15,10 +15,10 @@ class LoginController extends Controller
     public function ingresar(Request $request)
     {
         
-        $usuarios = [
+        $usuarios =  array(
             'admin' => '12345',
             'cliente' => 'juan000'
-        ];
+        );
 
         $usuario = $request->usuario;
         $clave = $request->clave;
