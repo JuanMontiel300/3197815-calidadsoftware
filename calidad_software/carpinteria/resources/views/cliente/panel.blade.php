@@ -129,7 +129,8 @@
     </header>
 
     <main>
-        <center><h3>Catálogo de Productos</h3></center>
+        <h3 style="text-align: center;">Catálogo de Productos</h3>
+
 
         @if(count($productos) > 0)
         <div class="grid">
