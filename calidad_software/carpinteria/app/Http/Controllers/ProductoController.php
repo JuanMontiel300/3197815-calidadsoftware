@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\DB;
 
 class ProductoController extends Controller
 {
-    
+    private const VALIDACION_TEXTO = 'required|string|max:100';
+
     public function index()
     {
-       
         $productos = DB::table('productos')
             ->leftJoin('tipos_productos', 'productos.id_tipo', '=', 'tipos_productos.id_tipo')
             ->select('productos.*', 'tipos_productos.nombre_tipo')
@@ -21,47 +21,40 @@ class ProductoController extends Controller
         return view('admi.panel', compact('productos'));
     }
 
-   
     public function create()
     {
         $tipos = DB::table('tipos_productos')->get();
         return view('admi.crear', compact('tipos'));
     }
 
-   
     public function store(Request $request)
     {
-       
         $request->validate([
-            'nombre' => 'required|string|max:100',
-            'material' => 'required|string|max:100',
+            'nombre' => self::VALIDACION_TEXTO,
+            'material' => self::VALIDACION_TEXTO,
             'precio' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'descripcion' => 'nullable|string|max:255',
             'id_tipo' => 'required|integer'
         ]);
 
-        
         Producto::create($request->all());
 
-        return redirect()->route('productos.index')->with('success', ' Producto creado correctamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto creado correctamente.');
     }
 
-    
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
         $tipos = DB::table('tipos_productos')->get();
-
         return view('admi.editar', compact('producto', 'tipos'));
     }
 
-   
     public function update(Request $request, $id)
     {
         $request->validate([
-            'nombre' => 'required|string|max:100',
-            'material' => 'required|string|max:100',
+            'nombre' => self::VALIDACION_TEXTO,
+            'material' => self::VALIDACION_TEXTO,
             'precio' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
             'descripcion' => 'nullable|string|max:255',
@@ -71,7 +64,7 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($id);
         $producto->update($request->all());
 
-        return redirect()->route('productos.index')->with('success', ' Producto actualizado correctamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto actualizado correctamente.');
     }
 
     public function show($id)
@@ -85,6 +78,6 @@ class ProductoController extends Controller
         $producto = Producto::findOrFail($id);
         $producto->delete();
 
-        return redirect()->route('productos.index')->with('success', ' Producto eliminado correctamente.');
+        return redirect()->route('productos.index')->with('success', 'Producto eliminado correctamente.');
     }
 }
