@@ -146,7 +146,7 @@
                 @endphp
 
                 <div class="card">
-                    <img src="{{ $imagen }}" alt="Imagen de {{ $p->nombre }}">
+                    <img src="{{ $imagen }}" alt="{{ $p->nombre }}">
                     <div class="card-content">
                         <h4>{{ $p->nombre }}</h4>
                         <p><strong>Tipo:</strong> {{ $p->nombre_tipo }}</p>
