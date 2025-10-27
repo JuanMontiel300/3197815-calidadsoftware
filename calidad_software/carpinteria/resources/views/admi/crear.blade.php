@@ -93,9 +93,8 @@
 </head>
 <body>
     <main>
-        <h2>Agregar Nuevo Producto </h2>
+        <h2>Agregar Nuevo Producto</h2>
 
-        {{-- Mostrar errores de validación --}}
         @if ($errors->any())
             <div class="error">
                 <ul>
@@ -109,20 +108,20 @@
         <form action="{{ route('productos.store') }}" method="POST">
             @csrf
 
-            <label>Nombre del producto:</label>
-            <input type="text" name="nombre" value="{{ old('nombre') }}" required>
+            <label for="nombre">Nombre del producto:</label>
+            <input id="nombre" type="text" name="nombre" value="{{ old('nombre') }}" required>
 
-            <label>Material:</label>
-            <input type="text" name="material" value="{{ old('material') }}" required>
+            <label for="material">Material:</label>
+            <input id="material" type="text" name="material" value="{{ old('material') }}" required>
 
-            <label>Precio (COP):</label>
-            <input type="number" name="precio" min="0" value="{{ old('precio') }}" required>
+            <label for="precio">Precio (COP):</label>
+            <input id="precio" type="number" name="precio" min="0" value="{{ old('precio') }}" required>
 
-            <label>Stock disponible:</label>
-            <input type="number" name="stock" min="0" value="{{ old('stock') }}" required>
+            <label for="stock">Stock disponible:</label>
+            <input id="stock" type="number" name="stock" min="0" value="{{ old('stock') }}" required>
 
-            <label>Tipo de producto:</label>
-            <select name="id_tipo" required>
+            <label for="id_tipo">Tipo de producto:</label>
+            <select id="id_tipo" name="id_tipo" required>
                 <option value="">-- Seleccionar tipo --</option>
                 @foreach($tipos as $tipo)
                     <option value="{{ $tipo->id_tipo }}" {{ old('id_tipo') == $tipo->id_tipo ? 'selected' : '' }}>
@@ -131,16 +130,15 @@
                 @endforeach
             </select>
 
-            <label>Descripción:</label>
-            <textarea name="descripcion" rows="3">{{ old('descripcion') }}</textarea>
+            <label for="descripcion">Descripción:</label>
+            <textarea id="descripcion" name="descripcion" rows="3">{{ old('descripcion') }}</textarea>
 
-            <button type="submit"> Guardar Producto</button>
+            <button type="submit">Guardar Producto</button>
         </form>
 
         <div class="back">
-            <a href="{{ route('productos.index') }}"> Volver al panel</a>
+            <a href="{{ route('productos.index') }}">Volver al panel</a>
         </div>
     </main>
 </body>
 </html>
-
